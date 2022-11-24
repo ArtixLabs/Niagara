@@ -17,10 +17,8 @@ class Deps:
             _data = f.read()
             _json_data = json.loads(_data)
             _pkgs = _json_data["packages"]
-
             for package in _pkgs:
-                self.pkgs.append(Package(package.get("pkgname"), package.get("arch_pkg")))
-
+                self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch_pkg")))
         f.close()
 
 

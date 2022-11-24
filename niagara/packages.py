@@ -1,5 +1,6 @@
 import subprocess
 from deps import *
+from template import __generate_database_file
 import platform
 import os
 import sys
@@ -13,35 +14,6 @@ class Packages():
     def __init__(self):
         self.config = self.set_config()
         logging.basicConfig(filename='niagara.log', encoding='utf-8', format='%(levelname)s -- %(message)s')
-    def __generate_config_file(self,dest):
-        str = '''
-        {
-            "packages": [
-                {
-                    "pkgname": "feh",
-                    "arch_pkg": "feh"
-                },
-                {
-                    "pkgname": "picom",
-                    "arch_pkg": "picom"
-                }
-            ],
-            "tiers": [
-                {
-                    "tier": "basic",
-                    "arch_pacman_pkgs": [
-                        "feh",
-                        "picom"
-                    ],
-                    "arch_aur_pkgs": [
-                        "librewolf-bin"
-                    ]
-                }
-            ]
-        }'''
-        with open(dest, 'w+') as f:
-            f.writelines(str)
-        f.close()
     def set_config(self):
         def set_superuser():
             logging.info('Checking for sudo binary...')
@@ -67,12 +39,12 @@ class Packages():
             else:
                 logging.fatal('Distribution is not supported.')
         def set_data_file():
-            if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/data.json"):
-                return os.environ['HOME'] + '/.local/share/niagara/data.json'
+            if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
+                return os.environ['HOME'] + '/.local/share/niagara/database.json'
             else:
                 os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
-                self.__generate_config_file(os.environ['HOME'] + '/.local/share/niagara/data.json')
-                return os.environ['HOME'] + '/.local/share/niagara/data.json'
+                __generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
+                return os.environ['HOME'] + '/.local/share/niagara/database.json'
         def set_pkgs() -> list[str]:
             x = Deps(set_data_file())
             tmp = []
