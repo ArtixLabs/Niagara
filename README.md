@@ -18,6 +18,56 @@
     </a>
 </div>
 
+## Niagara
+
+Niagara is a ricing tool made for Linux systems. It aims to be a universal tool that can be used on multiple distributions, as it does not rely on a singular package manager. Niagara manages configs by taking a JSON file that contains some fields such as `packages`, `dotfile`, `wallpaper`, etc. 
+
+### How does Niagara handle packages?
+
+Niagara has a list of packages that you can place inside the configuration file, and then it goes and checks it against the corresponding package for your linux distribution. A good example would be the following:
+
+```json
+{
+    "name": "doas",
+    "arch": "opendoas",
+    "void": "opendoas"
+}
+```
+
+This allows us to support multiple distributions, whilst making it a *write once, run anywhere* style of program.
+
+## Features
+
+- packages
+- config
+  - wallpaper
+  - dotfile
+
+## Example configuration
+
+```json
+{
+  "packages": [
+    "feh",
+    "doas",
+    "picom"
+  ],
+  "config": [
+    {
+      "option": "wallpaper",
+      "val": "https://github.com/emacs-dashboard/emacs-dashboard/raw/master/banners/emacs.png"
+    },
+    {
+      "option": "dotfile",
+      "val": [
+        "https://github.com/kavulox/nvim",
+        "https://github.com/kavulox/picom"
+      ]
+    }
+  ]
+}
+```
+
 ## Contributing
 
 New contributors should submit a PR with a short description of their changes.
