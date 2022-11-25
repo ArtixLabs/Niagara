@@ -76,9 +76,7 @@ New contributors should submit a PR with a short description of their changes.
 
 - Get more packages 
   - Make packages support multiple package managers.
-- Work on main part of project, and add argument parsing
-- Add support for custom config files
-- Cleanup dead code (not too much of an issue right now)
+- Split deps.py into multiple files 
 
 ## Author
 
