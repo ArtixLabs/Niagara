@@ -5,7 +5,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = fh.read()
 setup(
     name = 'niagara',
-    version = '0.0.1',
+    version = '0.1.2',
     author = 'kavulox',
     license = 'AGPL-3.0',
     description = 'A simple ricing tool for Linux systems.',
@@ -17,8 +17,7 @@ setup(
     install_requires = [requirements],
     python_requires='>=3.9',
     classifiers=[
-        "Programming Language :: Python :: 3.10",
-        "Operating System :: Linux",
+        "Programming Language :: Python :: 3.9"
     ],
     entry_points = '''
         [console_scripts]
