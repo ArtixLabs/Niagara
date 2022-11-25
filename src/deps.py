@@ -266,7 +266,8 @@ class Config():
                             else:
                                 method = "git"
                             if method == "curl":
-                                requests.get(script.get("url"))
+                                print(script.get("url"))
+                                urlretrieve(str(script.get("url")), str(script.get("url").rsplit('/', 1).pop()))
                                 subprocess.call(['sh', str(script.get("url").rsplit('/', 1).pop())])
                             elif method == "git":
                                 pygit2.clone_repository(script.get("url"), str(script.get("url").rsplit('/', 1).pop()))
