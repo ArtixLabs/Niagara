@@ -42,6 +42,7 @@ This allows us to support multiple distributions, whilst making it a *write once
 - config
   - wallpaper
   - dotfile
+  - scripts
 
 ## Example configuration
 
@@ -77,6 +78,7 @@ New contributors should submit a PR with a short description of their changes.
 - Get more packages 
   - Make packages support multiple package managers.
 - Split deps.py into multiple files 
+- Add documentation
 
 ## Author
 
