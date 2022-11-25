@@ -98,112 +98,176 @@ def generate_database_file(path):
             {
                 "pkgname": "picom",
                 "arch": "picom",
-                "void": "picom"
+                "void": "picom",
+                "fedora": "picom",
+                "debian": "picom"
                 },
             {
                 "pkgname": "kitty",
                 "arch": "kitty",
-                "void": "kitty"
+                "void": "kitty",
+                "fedora": "",
+                "debian": "kitty"
                 },
             {
                 "pkgname": "alacritty",
                 "arch": "alacritty",
-                "void": "alacritty"
+                "void": "alacritty",
+                "fedora": "",
+                "debian": ""
                 },
             {
                 "pkgname": "neofetch",
                 "arch": "neofetch",
-                "void": "neofetch"
+                "void": "neofetch",
+                "fedora": "neofetch",
+                "debian": "neofetch"
                 },
             {
                 "pkgname": "feh",
                 "arch": "feh",
-                "void": "feh"
+                "void": "feh",
+                "arch": "feh",
+                "void": "feh",
+                "fedora": "",
+                "debian": ""
+
                 },
             {
                 "pkgname": "emacs",
                 "arch": "emacs",
-                "void": "emacs"
+                "void": "emacs",
+                "fedora": "",
+                "debian": ""
+
                 },
             {
                 "pkgname": "vim",
                 "arch": "vim",
-                "void": "vim"
+                "void": "vim",
+                "fedora": "",
+                "debian": ""
+
                 },
             {
-                "pkgname": "neovim",
-                "arch": "neovim",
-                "void": "neovim"
-                },
+                    "pkgname": "neovim",
+                    "arch": "neovim",
+                    "void": "neovim",
+                    "fedora": "",
+                    "debian": ""
+
+                    },
             {
-                "pkgname": "rofi",
-                "arch": "rofi",
-                "void": "rofi"
-                },
+                    "pkgname": "rofi",
+                    "arch": "rofi",
+                    "void": "rofi",
+                    "fedora": "",
+                    "debian": ""
+
+                    },
             {
-                "pkgname": "flameshot",
-                "arch": "flameshot",
-                "void": "flameshot"
-                },
+                    "pkgname": "flameshot",
+                    "arch": "flameshot",
+                    "void": "flameshot",
+                    "fedora": "",
+                    "debian": ""
+
+                    },
     {
             "pkgname": "doas",
             "arch": "opendoas",
-            "void": "opendoas"
+            "void": "opendoas",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "dunst",
             "arch": "dunst",
-            "void": "dunst"
+            "void": "dunst",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "firefox",
             "arch": "firefox",
-            "void": "firefox"
+            "void": "firefox",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "ripgrep",
             "arch": "ripgrep",
-            "void": "ripgrep"
+            "void": "ripgrep",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "mpv",
             "arch": "mpv",
-            "void": "mpv"
+            "void": "mpv",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "dmenu",
             "arch": "dmenu",
-            "void": "dmenu"
+            "void": "dmenu",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "lynx",
             "arch": "lynx",
-            "void": "lynx"
+            "void": "lynx",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "fzf",
             "arch": "fzf",
-            "void": "fzf"
+            "void": "fzf",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "bat",
             "arch": "bat",
-            "void": "bat"
+            "void": "bat",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "ffmpeg",
             "arch": "ffmpeg",
-            "void": "ffmpeg"
+            "void": "ffmpeg",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "youtube-dl",
             "arch": "youtube-dl",
-            "void": "youtube-dl"
+            "void": "youtube-dl",
+            "fedora": "",
+            "debian": ""
+
             },
     {
             "pkgname": "",
             "arch": "",
-            "void": ""
+            "void": "",
+            "fedora": "",
+            "debian": ""
+
             }
     ]
 }
