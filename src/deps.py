@@ -1,4 +1,5 @@
 import json
+import pygit2
 import requests
 import subprocess
 import platform
@@ -253,6 +254,9 @@ class Config():
                         urlretrieve(str(opt.get("val")), file)
                         os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
                     subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
+                elif opt.get("option") == "dotfile":
+                    for x in opt.get("val"):
+                        pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
 
 class Pkgs:
     def __init__(self, file):
