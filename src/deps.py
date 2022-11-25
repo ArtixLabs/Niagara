@@ -67,6 +67,9 @@ class Packages():
             ('arch', arch),
             ('void', void)
             ])
+    def dump_all_pkgs(self, opt):
+        for x in self.config['pkgs']['{}'.format(opt)]:
+            print(x)
     def generate_full_cmd(self, path, opt):
         cmds = []
         for x in self.config['pkgs']['{}'.format(opt)]:
