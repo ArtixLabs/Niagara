@@ -1,6 +1,5 @@
 import json
 import pygit2
-import requests
 import subprocess
 import platform
 import os
@@ -67,8 +66,8 @@ class Packages():
             ('arch', arch),
             ('void', void)
             ])
-    def dump_all_pkgs(self):
-        for x in self.config['pkgs']:
+    def dump_all_pkgs(self, opt):
+        for x in self.config['pkgs']['{}'.format(opt)]:
             print(x)
     def generate_full_cmd(self, path, opt):
         cmds = []
