@@ -1,5 +1,5 @@
 import json
-
+import requests
 import subprocess
 import platform
 import os
@@ -235,14 +235,39 @@ class Deps:
         f.close()
 
 
+class Config():
+    def __init__(self, file):
+        self.file = file
+    
+    def operate(self):
+        with open(self.file) as f:
+            _data = f.read()
+            _json_data = json.loads(_data)
+            _config_opts = _json_data["config"]
+            for opt in _config_opts:
+                if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
+                    file = opt.get("val").rsplit('/', 1)
+                    if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
+                        r = requests.get(str(opt.get("val")))
+                        with open(os.path.join(os.environ['HOME'] + '/.wallpaper/', file), 'wb') as f:
+                            f.write(r.content)
+                        f.close
+                    else:
+                        os.mkdir(os.environ['HOME'] + '/.wallpaper')
+                        r = requests.get(str(opt.get("val")))
+                        with open(os.path.join(os.environ['HOME'] + '/.wallpaper/', file), 'wb') as f:
+                            f.write(r.content)
+                        f.close
+                    subprocess.call(['feh', '--bg-scale', file])
+
+
+
 
 class Pkgs:
     def __init__(self, file):
         self.file = file
         self.pkgs = []
         self.read_to_pkg()
-
-
     def read_to_pkg(self):
         with open(self.file) as f:
             _data = f.read()
