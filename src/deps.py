@@ -257,7 +257,7 @@ def generate_database_file(path):
 
             },
     {
-            "pkgname": "youtube-dl",
+            "pkgname": "ytdl",
             "arch": "youtube-dl",
             "void": "youtube-dl",
             "fedora": "",
