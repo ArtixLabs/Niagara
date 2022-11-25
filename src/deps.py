@@ -367,8 +367,8 @@ class Generic():
             if "source" in json.loads(_data):
                 for cmd in json.loads(_data)["source"]:
                     if "link" in cmd:
-                        link = cmd["link"]
-                        if "cmds" in cmd:
+                        pygit2.clone_repository(cmd["link"], str(cmd["link"].rsplit('/', 1).pop()))
+                    if "cmds" in cmd:
                             cmds = cmd["cmds"]
                             for x in cmds:
                                 if "cmd" in x:
