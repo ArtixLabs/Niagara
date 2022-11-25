@@ -2,7 +2,7 @@ import argparse
 from src import deps
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--config')
+parser.add_argument('-c','--config')
 
 args = parser.parse_args()
 def run():

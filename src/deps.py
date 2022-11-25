@@ -40,7 +40,7 @@ class Packages():
                 else:
                     logging.error('No xbps binary found.')
             else:
-                logging.fatal('Distribution is not supported.')
+                logging.fatal('Distribution "{}" is not supported.'.format(info["ID"]))
         def set_data_file():
             if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
@@ -54,7 +54,7 @@ class Packages():
             ('pkgman', set_pkg_manager()),
             ('data', set_data_file()),
             ('pkgs', self.set_pkgs())
-        ])
+            ])
     def set_pkgs(self) -> dict:
         x = Deps(os.environ['HOME'] + '/.local/share/niagara/database.json')
         arch = []
@@ -65,7 +65,7 @@ class Packages():
         return dict([
             ('arch', arch),
             ('void', void)
-        ])
+            ])
     def generate_full_cmd(self, path, opt):
         cmds = []
         for x in self.config['pkgs']['{}'.format(opt)]:
@@ -89,8 +89,6 @@ class Packages():
             subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'arch')))
         elif self.config['pkgman'] == '/usr/bin/xbps-install': # Not in use, yet.
             subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'void')))
-
-
 
 def generate_database_file(path):
     templ = """
@@ -213,9 +211,6 @@ def generate_database_file(path):
         f.writelines(templ)
     f.close()
 
-
-
-
 class Package:
     def __init__(self, name: str, arch_pkg: str, void_pkg: str):
         self.name = name
@@ -224,14 +219,11 @@ class Package:
 class UPackage:
     def __init__(self, name: str):
         self.name = name
-
 class Deps:
     def __init__(self, file):
         self.file = file
         self.pkgs = []
         self.read_to_pkg()
-
-
     def read_to_pkg(self):
         with open(self.file) as f:
             _data = f.read()
@@ -241,11 +233,10 @@ class Deps:
                 self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void")))
         f.close()
 
-
 class Config():
     def __init__(self, file):
         self.file = file
-    
+
     def operate(self):
         with open(self.file) as f:
             _data = f.read()
@@ -253,18 +244,15 @@ class Config():
             _config_opts = _json_data["config"]
             for opt in _config_opts:
                 if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
-                    file = str(opt.get("val").rsplit('/', 1)).pop()
-                    print((file))
-                    print((opt.get("val")))
+                    file = str(opt.get("val").rsplit('/', 1).pop())
                     if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
                         urlretrieve(str(opt.get("val")), file)
+                        os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
                     else:
                         os.mkdir(os.environ['HOME'] + '/.wallpaper')
                         urlretrieve(str(opt.get("val")), file)
-                    subprocess.call(['feh', '--bg-scale', file])
-
-
-
+                        os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
+                    subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
 
 class Pkgs:
     def __init__(self, file):
@@ -280,6 +268,3 @@ class Pkgs:
                 self.pkgs.append(UPackage(name=package))
         f.close()
 
-
-c = Config('tmp.json')
-c.operate()
