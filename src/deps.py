@@ -259,6 +259,21 @@ class Config():
                     elif opt.get("option") == "dotfile":
                         for x in opt.get("val"):
                             pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
+                    elif opt.get("option") == "scripts":
+                        for script in opt.get("val"):
+                            if script.get("method"):
+                                method = script.get("method")
+                            else:
+                                method = "git"
+                            if method == "curl":
+                                requests.get(script.get("url"))
+                                subprocess.call(['sh', str(script.get("url").rsplit('/', 1).pop())])
+                            elif method == "git":
+                                pygit2.clone_repository(script.get("url"), str(script.get("url").rsplit('/', 1).pop()))
+                                if script.get("trigger"):
+                                    subprocess.call(script.get("trigger").split())
+                                else:
+                                    subprocess.call(['sh', script.get("url") + '/' + 'script.sh'])
 
 class Pkgs:
     def __init__(self, file):
