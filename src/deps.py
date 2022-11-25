@@ -130,7 +130,7 @@ def generate_database_file(path):
                 "arch": "feh",
                 "void": "feh",
                 "fedora": "",
-                "debian": ""
+                "debian": "feh"
 
                 },
             {
@@ -138,7 +138,7 @@ def generate_database_file(path):
                 "arch": "emacs",
                 "void": "emacs",
                 "fedora": "",
-                "debian": ""
+                "debian": "emacs"
 
                 },
             {
@@ -146,7 +146,7 @@ def generate_database_file(path):
                 "arch": "vim",
                 "void": "vim",
                 "fedora": "",
-                "debian": ""
+                "debian": "vim"
 
                 },
             {
@@ -154,7 +154,7 @@ def generate_database_file(path):
                     "arch": "neovim",
                     "void": "neovim",
                     "fedora": "",
-                    "debian": ""
+                    "debian": "neovim"
 
                     },
             {
@@ -162,7 +162,7 @@ def generate_database_file(path):
                     "arch": "rofi",
                     "void": "rofi",
                     "fedora": "",
-                    "debian": ""
+                    "debian": "rofi"
 
                     },
             {
@@ -170,7 +170,7 @@ def generate_database_file(path):
                     "arch": "flameshot",
                     "void": "flameshot",
                     "fedora": "",
-                    "debian": ""
+                    "debian": "flameshot"
 
                     },
     {
@@ -186,7 +186,7 @@ def generate_database_file(path):
             "arch": "dunst",
             "void": "dunst",
             "fedora": "",
-            "debian": ""
+            "debian": "dunst"
 
             },
     {
@@ -194,7 +194,7 @@ def generate_database_file(path):
             "arch": "firefox",
             "void": "firefox",
             "fedora": "",
-            "debian": ""
+            "debian": "firefox"
 
             },
     {
@@ -202,7 +202,7 @@ def generate_database_file(path):
             "arch": "ripgrep",
             "void": "ripgrep",
             "fedora": "",
-            "debian": ""
+            "debian": "ripgrep"
 
             },
     {
@@ -210,7 +210,7 @@ def generate_database_file(path):
             "arch": "mpv",
             "void": "mpv",
             "fedora": "",
-            "debian": ""
+            "debian": "mpv"
 
             },
     {
@@ -226,7 +226,7 @@ def generate_database_file(path):
             "arch": "lynx",
             "void": "lynx",
             "fedora": "",
-            "debian": ""
+            "debian": "lynx"
 
             },
     {
@@ -234,7 +234,7 @@ def generate_database_file(path):
             "arch": "fzf",
             "void": "fzf",
             "fedora": "",
-            "debian": ""
+            "debian": "fzf"
 
             },
     {
@@ -242,7 +242,7 @@ def generate_database_file(path):
             "arch": "bat",
             "void": "bat",
             "fedora": "",
-            "debian": ""
+            "debian": "bat"
 
             },
     {
@@ -250,7 +250,7 @@ def generate_database_file(path):
             "arch": "ffmpeg",
             "void": "ffmpeg",
             "fedora": "",
-            "debian": ""
+            "debian": "ffmpeg"
 
             },
     {
@@ -258,7 +258,7 @@ def generate_database_file(path):
             "arch": "youtube-dl",
             "void": "youtube-dl",
             "fedora": "",
-            "debian": ""
+            "debian": "youtube-dl"
 
             },
     {
