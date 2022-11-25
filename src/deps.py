@@ -4,8 +4,7 @@ import subprocess
 import platform
 import os
 import logging
-
-
+from urllib.request import urlretrieve
 
 class Packages():
     def __init__(self):
@@ -33,12 +32,20 @@ class Packages():
                     return '/usr/bin/pacman'
                 else:
                     logging.error('No pacman binary found.')
+            elif info["ID"] == "void":
+                logging.info('Distribution is VoidLinux. Checking for xbps binaries...')
+                if os.path.exists('/usr/bin/xbps-install'):
+                    logging.info('Found xbps-install.')
+                    return '/usr/bin/xbps-install'
+                else:
+                    logging.error('No xbps binary found.')
             else:
                 logging.fatal('Distribution is not supported.')
         def set_data_file():
             if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
             else:
+                os.mkdir(os.environ['HOME'] + '/.local/share')
                 os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
                 generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
@@ -246,18 +253,14 @@ class Config():
             _config_opts = _json_data["config"]
             for opt in _config_opts:
                 if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
-                    file = opt.get("val").rsplit('/', 1)
+                    file = str(opt.get("val").rsplit('/', 1)).pop()
+                    print((file))
+                    print((opt.get("val")))
                     if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
-                        r = requests.get(str(opt.get("val")))
-                        with open(os.path.join(os.environ['HOME'] + '/.wallpaper/', file), 'wb') as f:
-                            f.write(r.content)
-                        f.close
+                        urlretrieve(str(opt.get("val")), file)
                     else:
                         os.mkdir(os.environ['HOME'] + '/.wallpaper')
-                        r = requests.get(str(opt.get("val")))
-                        with open(os.path.join(os.environ['HOME'] + '/.wallpaper/', file), 'wb') as f:
-                            f.write(r.content)
-                        f.close
+                        urlretrieve(str(opt.get("val")), file)
                     subprocess.call(['feh', '--bg-scale', file])
 
 
@@ -278,4 +281,5 @@ class Pkgs:
         f.close()
 
 
-
+c = Config('tmp.json')
+c.operate()
