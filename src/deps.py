@@ -39,6 +39,20 @@ class Packages():
                     return '/usr/bin/xbps-install'
                 else:
                     logging.error('No xbps binary found.')
+            elif info["ID"] == "fedora":
+                logging.info('Distribution is FedoraLinux. Checking for dnf binaries...')
+                if os.path.exists('/usr/bin/dnf'):
+                    logging.info('Found dnf.')
+                    return '/usr/bin/dnf'
+                else:
+                    logging.error('No xbps binary found.')
+            elif info["ID"] == "gentoo":
+                logging.info('Distribution is GentooLinux. Checking for portage binaries...')
+                if os.path.exists('/usr/bin/emerge'):
+                    logging.info('Found portage.')
+                    return '/usr/bin/emerge'
+                else:
+                    logging.error('No portage/emerge binary found.')
             else:
                 logging.fatal('Distribution "{}" is not supported.'.format(info["ID"]))
         def set_data_file():
@@ -102,21 +116,24 @@ def generate_database_file(path):
                 "arch": "picom",
                 "void": "picom",
                 "fedora": "picom",
-                "debian": "picom"
+                "debian": "picom",
+                "gentoo": "x11-misc/picom"
                 },
             {
                 "pkgname": "kitty",
                 "arch": "kitty",
                 "void": "kitty",
-                "fedora": "",
-                "debian": "kitty"
+                "fedora": "kitty",
+                "debian": "kitty",
+                "gentoo": "x11-terms/kitty"
                 },
             {
                 "pkgname": "alacritty",
                 "arch": "alacritty",
                 "void": "alacritty",
-                "fedora": "",
+                "fedora": "alacritty",
                 "debian": ""
+                "gentoo": "x11-terms/alacritty"
                 },
             {
                 "pkgname": "neofetch",
@@ -124,6 +141,7 @@ def generate_database_file(path):
                 "void": "neofetch",
                 "fedora": "neofetch",
                 "debian": "neofetch"
+                "gentoo": "app-misc/neofetch"
                 },
             {
                 "pkgname": "feh",
@@ -133,7 +151,7 @@ def generate_database_file(path):
                 "void": "feh",
                 "fedora": "",
                 "debian": "feh"
-
+                "gentoo": "media-gfx/feh"
                 },
             {
                 "pkgname": "emacs",
@@ -141,7 +159,7 @@ def generate_database_file(path):
                 "void": "emacs",
                 "fedora": "",
                 "debian": "emacs"
-
+                "gentoo": "app-editors/emacs"
                 },
             {
                 "pkgname": "vim",
@@ -149,7 +167,7 @@ def generate_database_file(path):
                 "void": "vim",
                 "fedora": "",
                 "debian": "vim"
-
+                "gentoo": "app-editors/vim"
                 },
             {
                     "pkgname": "neovim",
@@ -157,7 +175,7 @@ def generate_database_file(path):
                     "void": "neovim",
                     "fedora": "",
                     "debian": "neovim"
-
+                    "gentoo": "app-editors/neovim"
                     },
             {
                     "pkgname": "rofi",
@@ -165,7 +183,7 @@ def generate_database_file(path):
                     "void": "rofi",
                     "fedora": "",
                     "debian": "rofi"
-
+                    "gentoo": "x11-misc/rofi"
                     },
             {
                     "pkgname": "flameshot",
@@ -173,15 +191,15 @@ def generate_database_file(path):
                     "void": "flameshot",
                     "fedora": "",
                     "debian": "flameshot"
-
+                    "gentoo": "media-gfx/flameshot"
                     },
     {
             "pkgname": "doas",
             "arch": "opendoas",
             "void": "opendoas",
-            "fedora": "",
+            "fedora": "opendoas",
             "debian": ""
-
+            "gentoo": "app-admin/doas"
             },
     {
             "pkgname": "dunst",
@@ -189,7 +207,7 @@ def generate_database_file(path):
             "void": "dunst",
             "fedora": "",
             "debian": "dunst"
-
+            "gentoo": "x11-misc/dunst"
             },
     {
             "pkgname": "firefox",
@@ -197,7 +215,7 @@ def generate_database_file(path):
             "void": "firefox",
             "fedora": "",
             "debian": "firefox"
-
+            "gentoo": "www-client/firefox-bin"
             },
     {
             "pkgname": "ripgrep",
@@ -205,7 +223,7 @@ def generate_database_file(path):
             "void": "ripgrep",
             "fedora": "",
             "debian": "ripgrep"
-
+            "gentoo": "sys-apps/ripgrep"
             },
     {
             "pkgname": "mpv",
@@ -213,7 +231,7 @@ def generate_database_file(path):
             "void": "mpv",
             "fedora": "",
             "debian": "mpv"
-
+            "gentoo": "media-video/mpv"
             },
     {
             "pkgname": "dmenu",
@@ -221,7 +239,7 @@ def generate_database_file(path):
             "void": "dmenu",
             "fedora": "",
             "debian": ""
-
+            "gentoo": "x11-misc/dmenu"
             },
     {
             "pkgname": "lynx",
@@ -229,7 +247,7 @@ def generate_database_file(path):
             "void": "lynx",
             "fedora": "",
             "debian": "lynx"
-
+            "gentoo": "www-client/lynx"
             },
     {
             "pkgname": "fzf",
@@ -237,7 +255,7 @@ def generate_database_file(path):
             "void": "fzf",
             "fedora": "",
             "debian": "fzf"
-
+            "gentoo": "www-client/lynx"
             },
     {
             "pkgname": "bat",
@@ -245,7 +263,7 @@ def generate_database_file(path):
             "void": "bat",
             "fedora": "",
             "debian": "bat"
-
+            "gentoo": "sys-apps/bat"
             },
     {
             "pkgname": "ffmpeg",
@@ -253,7 +271,7 @@ def generate_database_file(path):
             "void": "ffmpeg",
             "fedora": "",
             "debian": "ffmpeg"
-
+            "gentoo": "media-video/ffmpeg"
             },
     {
             "pkgname": "ytdl",
@@ -261,7 +279,7 @@ def generate_database_file(path):
             "void": "youtube-dl",
             "fedora": "",
             "debian": "youtube-dl"
-
+            "gentoo": "net-misc/youtube-dl"
             },
     {
             "pkgname": "",
@@ -269,7 +287,7 @@ def generate_database_file(path):
             "void": "",
             "fedora": "",
             "debian": ""
-
+            "gentoo": ""
             }
     ]
 }
