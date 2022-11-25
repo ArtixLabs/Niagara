@@ -229,9 +229,10 @@ class Deps:
         with open(self.file) as f:
             _data = f.read()
             _json_data = json.loads(_data)
-            _pkgs = _json_data["packages"]
-            for package in _pkgs:
-                self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void")))
+            if "packages" in _json_data:
+                _pkgs = _json_data["packages"]
+                for package in _pkgs:
+                    self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void")))
         f.close()
 
 class Config():
@@ -242,21 +243,22 @@ class Config():
         with open(self.file) as f:
             _data = f.read()
             _json_data = json.loads(_data)
-            _config_opts = _json_data["config"]
-            for opt in _config_opts:
-                if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
-                    file = str(opt.get("val").rsplit('/', 1).pop())
-                    if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
-                        urlretrieve(str(opt.get("val")), file)
-                        os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
-                    else:
-                        os.mkdir(os.environ['HOME'] + '/.wallpaper')
-                        urlretrieve(str(opt.get("val")), file)
-                        os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
-                    subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
-                elif opt.get("option") == "dotfile":
-                    for x in opt.get("val"):
-                        pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
+            if "config" in _json_data:
+                _config_opts = _json_data["config"]
+                for opt in _config_opts:
+                    if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
+                        file = str(opt.get("val").rsplit('/', 1).pop())
+                        if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
+                            urlretrieve(str(opt.get("val")), file)
+                            os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
+                        else:
+                            os.mkdir(os.environ['HOME'] + '/.wallpaper')
+                            urlretrieve(str(opt.get("val")), file)
+                            os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
+                        subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
+                    elif opt.get("option") == "dotfile":
+                        for x in opt.get("val"):
+                            pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
 
 class Pkgs:
     def __init__(self, file):
@@ -267,8 +269,9 @@ class Pkgs:
         with open(self.file) as f:
             _data = f.read()
             _json_data = json.loads(_data)
-            _pkgs = _json_data["packages"]
-            for package in _pkgs:
-                self.pkgs.append(UPackage(name=package))
+            if "packages" in _json_data:
+                _pkgs = _json_data["packages"]
+                for package in _pkgs:
+                    self.pkgs.append(UPackage(name=package))
         f.close()
 
