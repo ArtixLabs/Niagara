@@ -1,7 +1,7 @@
 import argparse
 from src import deps
 parser = argparse.ArgumentParser()
-VERSION="0.0.7"
+VERSION="0.0.9"
 parser.add_argument('-c','--config')
 parser.add_argument('-p', '--packages')
 parser.add_argument('-v', '--version', action="store_true")
@@ -17,6 +17,9 @@ def run():
         x.install_pkgs(args.config)
         v = deps.Config(args.config)
         v.operate()
+        x = deps.Generic(args.config)
+        x.operate()
+
 
 
 
