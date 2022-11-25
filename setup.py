@@ -5,7 +5,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = fh.read()
 setup(
     name = 'niagara',
-    version = '0.0.2',
+    version = '0.0.3',
     author = 'kavulox',
     license = 'AGPL-3.0',
     description = 'A simple ricing tool for Linux systems.',

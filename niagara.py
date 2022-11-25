@@ -1,7 +1,7 @@
 import argparse
 from src import deps
 parser = argparse.ArgumentParser()
-VERSION="0.0.2"
+VERSION="0.0.3"
 parser.add_argument('-c','--config')
 parser.add_argument('-v', '--version')
 args = parser.parse_args()
