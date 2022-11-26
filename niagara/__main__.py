@@ -3,7 +3,7 @@ from .config import Config
 from .generic import Generic
 from .packages import Packages
 parser = argparse.ArgumentParser()
-VERSION="0.0.0.1"
+VERSION="0.0.0.2"
 parser.add_argument('-c','--config')
 parser.add_argument('-p', '--packages')
 parser.add_argument('--set-os')
