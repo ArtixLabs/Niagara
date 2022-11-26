@@ -1,7 +1,7 @@
 import argparse
 from .config import Config
 from .generic import Generic
-from .packages import Packages
+from .packages import Packages, force_gen
 parser = argparse.ArgumentParser()
 VERSION="0.0.0.4"
 parser.add_argument('-c','--config')
@@ -17,8 +17,7 @@ def run():
     else:
         arch = 'arch'
     if args.refresh_database == True:
-        x = Packages()
-        x.force_gen()
+        force_gen()
     if args.dry:
         x = Packages()
         x.dry_run(args.dry, arch)

@@ -1,3 +1,4 @@
 requests
 argparse
 pygit2
+termcolor
