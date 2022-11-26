@@ -73,6 +73,10 @@ This allows us to support multiple distributions, whilst making it a *write once
 
 New contributors should submit a PR with a short description of their changes.
 
+## ArtixLabs
+
+Join our discord server at https://discord.gg/ajNswSyf6q
+
 ## Todo
 
 - Get more packages 
