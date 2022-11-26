@@ -1,10 +1,8 @@
 import json
-import pygit2
 import subprocess
 import platform
 import os
 import logging
-from urllib.request import urlretrieve
 
 class Packages():
     def __init__(self):
@@ -59,7 +57,8 @@ class Packages():
             if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
             else:
-                os.mkdir(os.environ['HOME'] + '/.local/share')
+                if not (os.path.exists(os.environ['HOME'] + "/.local/share")):
+                    os.mkdir(os.environ['HOME'] + '/.local/share')
                 os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
                 generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
@@ -71,14 +70,20 @@ class Packages():
             ])
     def set_pkgs(self) -> dict:
         x = Deps(os.environ['HOME'] + '/.local/share/niagara/database.json')
-        arch = []
-        void = []
+        arch = void = gentoo = fedora = debian = []
         for pkg in x.pkgs:
             arch.append({'pkgname': pkg.name, 'pkg': pkg.arch_pkg})
             void.append({'pkgname': pkg.name, 'pkg': pkg.void_pkg})
+            gentoo.append({'pkgname': pkg.name, 'pkg': pkg.gentoo_pkg})
+            fedora.append({'pkgname': pkg.name, 'pkg': pkg.fedora_pkg})
+            debian.append({'pkgname': pkg.name, 'pkg': pkg.debian_pkg})
+  
         return dict([
             ('arch', arch),
-            ('void', void)
+            ('void', void),
+            ('gentoo', gentoo),
+            ('fedora', fedora),
+            ('debian', debian)
             ])
     def dump_all_pkgs(self, opt):
         for x in self.config['pkgs']['{}'.format(opt)]:
@@ -139,7 +144,7 @@ def generate_database_file(path):
                 "arch": "alacritty",
                 "void": "alacritty",
                 "fedora": "alacritty",
-                "debian": ""
+                "debian": "",
                 "gentoo": "x11-terms/alacritty"
                 },
             {
@@ -147,7 +152,7 @@ def generate_database_file(path):
                 "arch": "neofetch",
                 "void": "neofetch",
                 "fedora": "neofetch",
-                "debian": "neofetch"
+                "debian": "neofetch",
                 "gentoo": "app-misc/neofetch"
                 },
             {
@@ -157,7 +162,7 @@ def generate_database_file(path):
                 "arch": "feh",
                 "void": "feh",
                 "fedora": "",
-                "debian": "feh"
+                "debian": "feh",
                 "gentoo": "media-gfx/feh"
                 },
             {
@@ -165,7 +170,7 @@ def generate_database_file(path):
                 "arch": "emacs",
                 "void": "emacs",
                 "fedora": "",
-                "debian": "emacs"
+                "debian": "emacs",
                 "gentoo": "app-editors/emacs"
                 },
             {
@@ -173,7 +178,7 @@ def generate_database_file(path):
                 "arch": "vim",
                 "void": "vim",
                 "fedora": "",
-                "debian": "vim"
+                "debian": "vim",
                 "gentoo": "app-editors/vim"
                 },
             {
@@ -181,7 +186,7 @@ def generate_database_file(path):
                     "arch": "neovim",
                     "void": "neovim",
                     "fedora": "",
-                    "debian": "neovim"
+                    "debian": "neovim",
                     "gentoo": "app-editors/neovim"
                     },
             {
@@ -189,7 +194,7 @@ def generate_database_file(path):
                     "arch": "rofi",
                     "void": "rofi",
                     "fedora": "",
-                    "debian": "rofi"
+                    "debian": "rofi",
                     "gentoo": "x11-misc/rofi"
                     },
             {
@@ -197,7 +202,7 @@ def generate_database_file(path):
                     "arch": "flameshot",
                     "void": "flameshot",
                     "fedora": "",
-                    "debian": "flameshot"
+                    "debian": "flameshot",
                     "gentoo": "media-gfx/flameshot"
                     },
     {
@@ -205,7 +210,7 @@ def generate_database_file(path):
             "arch": "opendoas",
             "void": "opendoas",
             "fedora": "opendoas",
-            "debian": ""
+            "debian": "",
             "gentoo": "app-admin/doas"
             },
     {
@@ -213,7 +218,7 @@ def generate_database_file(path):
             "arch": "dunst",
             "void": "dunst",
             "fedora": "",
-            "debian": "dunst"
+            "debian": "dunst",
             "gentoo": "x11-misc/dunst"
             },
     {
@@ -221,7 +226,7 @@ def generate_database_file(path):
             "arch": "firefox",
             "void": "firefox",
             "fedora": "",
-            "debian": "firefox"
+            "debian": "firefox",
             "gentoo": "www-client/firefox-bin"
             },
     {
@@ -229,7 +234,7 @@ def generate_database_file(path):
             "arch": "ripgrep",
             "void": "ripgrep",
             "fedora": "",
-            "debian": "ripgrep"
+            "debian": "ripgrep",
             "gentoo": "sys-apps/ripgrep"
             },
     {
@@ -237,7 +242,7 @@ def generate_database_file(path):
             "arch": "mpv",
             "void": "mpv",
             "fedora": "",
-            "debian": "mpv"
+            "debian": "mpv",
             "gentoo": "media-video/mpv"
             },
     {
@@ -245,7 +250,7 @@ def generate_database_file(path):
             "arch": "dmenu",
             "void": "dmenu",
             "fedora": "",
-            "debian": ""
+            "debian": "",
             "gentoo": "x11-misc/dmenu"
             },
     {
@@ -253,7 +258,7 @@ def generate_database_file(path):
             "arch": "lynx",
             "void": "lynx",
             "fedora": "",
-            "debian": "lynx"
+            "debian": "lynx",
             "gentoo": "www-client/lynx"
             },
     {
@@ -261,7 +266,7 @@ def generate_database_file(path):
             "arch": "fzf",
             "void": "fzf",
             "fedora": "",
-            "debian": "fzf"
+            "debian": "fzf",
             "gentoo": "www-client/lynx"
             },
     {
@@ -269,7 +274,7 @@ def generate_database_file(path):
             "arch": "bat",
             "void": "bat",
             "fedora": "",
-            "debian": "bat"
+            "debian": "bat",
             "gentoo": "sys-apps/bat"
             },
     {
@@ -277,7 +282,7 @@ def generate_database_file(path):
             "arch": "ffmpeg",
             "void": "ffmpeg",
             "fedora": "",
-            "debian": "ffmpeg"
+            "debian": "ffmpeg",
             "gentoo": "media-video/ffmpeg"
             },
     {
@@ -285,7 +290,7 @@ def generate_database_file(path):
             "arch": "youtube-dl",
             "void": "youtube-dl",
             "fedora": "",
-            "debian": "youtube-dl"
+            "debian": "youtube-dl",
             "gentoo": "net-misc/youtube-dl"
             },
     {
@@ -293,7 +298,7 @@ def generate_database_file(path):
             "arch": "",
             "void": "",
             "fedora": "",
-            "debian": ""
+            "debian": "",
             "gentoo": ""
             }
     ]
@@ -304,10 +309,13 @@ def generate_database_file(path):
     f.close()
 
 class Package:
-    def __init__(self, name: str, arch_pkg: str, void_pkg: str):
+    def __init__(self, name: str, arch_pkg: str, void_pkg: str, gentoo_pkg: str, fedora_pkg: str, debian_pkg: str):
         self.name = name
         self.arch_pkg = arch_pkg
         self.void_pkg = void_pkg
+        self.gentoo_pkg = gentoo_pkg
+        self.fedora_pkg = fedora_pkg
+        self.debian_pkg = debian_pkg
 class UPackage:
     def __init__(self, name: str):
         self.name = name
@@ -338,7 +346,7 @@ class Deps:
             if "packages" in _json_data:
                 _pkgs = _json_data["packages"]
                 for package in _pkgs:
-                    self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void")))
+                    self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void"), debian_pkg=package.get("debian"), fedora_pkg=package.get("fedora"), gentoo_pkg=package.get("gentoo")))
         f.close()
 
 
