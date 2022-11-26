@@ -3,7 +3,7 @@ from .config import Config
 from .generic import Generic
 from .packages import Packages, force_gen
 parser = argparse.ArgumentParser()
-VERSION="0.0.0.6"
+VERSION="0.0.0.7"
 parser.add_argument('-c','--config')
 parser.add_argument('--refresh-database', action="store_true")
 parser.add_argument('-p', '--packages')

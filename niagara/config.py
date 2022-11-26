@@ -1,4 +1,5 @@
 import os
+import psutil
 import subprocess
 from urllib.request import urlretrieve
 import json
@@ -25,7 +26,14 @@ class Config():
                             os.mkdir(os.environ['HOME'] + '/.wallpaper')
                             urlretrieve(str(opt.get("val")), file)
                             os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
-                        subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
+                        if "Xorg" in (i.name() for i in psutil.process_iter()):
+                            subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
+                        else:
+                            if "xinitrc" in _json_data:
+                                with open(os.environ['HOME'] + '/.xinitrc') as f:
+                                    f.write('\n')
+                                    f.write('feh ' + '--bg-scale ' + os.environ['HOME'] + '/.wallpaper/' + file)
+                                f.close()
                     elif opt.get("option") == "dotfile":
                         for x in opt.get("val"):
                             pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
