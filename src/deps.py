@@ -93,6 +93,14 @@ class Packages():
             if pkg.name in cmds:
                 pkgs.append(cmds[pkg.name])
         return pkgs
+    def dry_run(self, path, opt):
+        cmds = {}
+        for x in self.config['pkgs']['{}'.format(opt)]:
+            cmds[x['pkgname']] = x['pkg']
+        vuln = Pkgs(path)
+        for pkg in vuln.pkgs:
+            if pkg.name in cmds:
+                print(cmds[pkg.name])
     def install_pkgs(self, path):
         def conc(arr, lip):
             tmp = []
