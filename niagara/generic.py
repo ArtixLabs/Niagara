@@ -28,7 +28,7 @@ class Generic():
                     lines.append(cmd)
                 with open(os.environ['HOME'] + '/.xinitrc', 'w+') as f:
                     for line in lines:
-                        f.writelines('\n')
                         f.writelines([line])
+                        f.writelines('\n')
                 f.close()
 
