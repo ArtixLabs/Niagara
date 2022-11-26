@@ -27,7 +27,8 @@ class Generic():
                 for cmd in json.loads(_data)["xinitrc"]:
                     lines.append(cmd)
 
-                with open(os.environ['HOME'] + '/.xinitrc') as f:
-                    f.writelines(lines)
+                with open(os.environ['HOME'] + '/.xinitrc', 'w+') as f:
+                    for line in lines:
+                        f.writelines([line])
                 f.close()
 
