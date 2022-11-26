@@ -94,8 +94,14 @@ class Packages():
             ('debian', debian)
             ])
     def dump_all_pkgs(self, opt):
+        def red(str):
+            return colored(str, 'red', attrs=['bold'])
+        def blue(str):
+            return colored(str, 'blue', attrs=['bold'])
+        def green(str):
+            return colored(str, 'green', attrs=['bold'])
         for x in self.config['pkgs']['{}'.format(opt)]:
-            print(x)
+            print(green('{\'') + blue('pkgname') + green('\': \'') + red(x['pkgname']) + green('\','), green('\'') + blue('pkg') + green('\': \'') + red(x['pkg']) + green('\'') + green('}'))
     def generate_full_cmd(self, path, opt):
         cmds = {}
         for x in self.config['pkgs']['{}'.format(opt)]:
