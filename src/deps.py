@@ -84,16 +84,15 @@ class Packages():
         for x in self.config['pkgs']['{}'.format(opt)]:
             print(x)
     def generate_full_cmd(self, path, opt):
-        cmds = []
+        cmds = {}
         for x in self.config['pkgs']['{}'.format(opt)]:
-            cmds.append(x['pkgname'])
+            cmds[x['pkgname']] = x['pkg']
         vuln = Pkgs(path)
         pkgs = []
         for pkg in vuln.pkgs:
             if pkg.name in cmds:
-                pkgs.append(pkg.name)
+                pkgs.append(cmds[pkg.name])
         return pkgs
-
     def install_pkgs(self, path):
         def conc(arr, lip):
             tmp = []
