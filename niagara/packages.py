@@ -129,9 +129,11 @@ class Packages():
                 tmp.append(x)
             return tmp
         if self.config['pkgman'] == '/usr/bin/pacman':
-            subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'arch')))
+            if self.generate_full_cmd(path, 'arch') != []:
+                subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'arch')))
         elif self.config['pkgman'] == '/usr/bin/xbps-install': # Not in use, yet.
-            subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'void')))
+            if self.generate_full_cmd(path, 'void') != []:
+                subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'void')))
 
 class Package:
     def __init__(self, name: str, arch_pkg: str, void_pkg: str, gentoo_pkg: str, fedora_pkg: str, debian_pkg: str):
@@ -158,7 +160,6 @@ class Pkgs:
                 for package in _pkgs:
                     self.pkgs.append(UPackage(name=package))
         f.close()
-
 class Deps:
     def __init__(self, file):
         self.file = file
