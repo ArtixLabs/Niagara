@@ -159,8 +159,6 @@ def generate_database_file(path):
                 "pkgname": "feh",
                 "arch": "feh",
                 "void": "feh",
-                "arch": "feh",
-                "void": "feh",
                 "fedora": "",
                 "debian": "feh",
                 "gentoo": "media-gfx/feh"
