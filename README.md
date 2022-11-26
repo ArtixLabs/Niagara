@@ -77,6 +77,8 @@ New contributors should submit a PR with a short description of their changes.
 
 Join our discord server at https://discord.gg/ajNswSyf6q
 
+Join our Matrix space at https://matrix.to/#/#artixlabs:halogen.city
+
 ## Todo
 
 - Get more packages 
