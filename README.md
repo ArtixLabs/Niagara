@@ -87,10 +87,12 @@ Join our Matrix space at https://matrix.to/#/#artixlabs:halogen.city
 
 ## Todo
 
-- Get more packages 
+- Get more packages.
   - Make packages support multiple package managers.
-- Split deps.py into multiple files 
-- Add documentation
+- Split deps.py into multiple files.
+- Add documentation.
+- Add checks to see if a specified package is not natively available for a distribution, then to refer to a custom build option.
+
 
 ## Author
 
