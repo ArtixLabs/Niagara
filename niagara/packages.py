@@ -3,57 +3,60 @@ import subprocess
 from .template import generate_database_file
 import platform
 import os
-import logging
+from termcolor import colored
 
+def inf(str):
+    print(colored(str, 'blue', attrs=['bold']))
+def error(str):
+    print(colored(str, 'red', attrs=['bold']))
 class Packages():
     def __init__(self):
         self.config = self.set_config()
-        logging.basicConfig(filename='niagara.log', encoding='utf-8', format='%(levelname)s -- %(message)s')
     def set_config(self):
         def set_superuser():
-            logging.info('Checking for sudo binary...')
+            inf('Checking for sudo binary...')
             if os.path.exists('/usr/bin/sudo'):
-                logging.info('Found sudo binary.')
+                inf('Found sudo binary.')
                 return 'sudo'
             elif os.path.exists('/usr/bin/doas'):
-                logging.info('Found doas binary.')
+                inf('Found doas binary.')
                 return 'doas'
             else:
-                logging.info('Found no superuser binary. Defaulting to "su"')
+                inf('Found no superuser binary. Defaulting to "su"')
                 return 'su -c'
         def set_pkg_manager():
-            logging.info('Checking package manager...')
+            inf('Checking package manager...')
             info = platform.freedesktop_os_release()
             if info["ID"] == "arch":
-                logging.info('Distribtion is ArchLinux. Checking for pacman binary...')
+                inf('Distribtion is ArchLinux. Checking for pacman binary...')
                 if os.path.exists('/usr/bin/pacman'):
-                    logging.info('Found pacman.')
+                    inf('Found pacman.')
                     return '/usr/bin/pacman'
                 else:
-                    logging.error('No pacman binary found.')
+                    error('No pacman binary found.')
             elif info["ID"] == "void":
-                logging.info('Distribution is VoidLinux. Checking for xbps binaries...')
+                inf('Distribution is VoidLinux. Checking for xbps binaries...')
                 if os.path.exists('/usr/bin/xbps-install'):
-                    logging.info('Found xbps-install.')
+                    inf('Found xbps-install.')
                     return '/usr/bin/xbps-install'
                 else:
-                    logging.error('No xbps binary found.')
+                    error('No xbps binary found.')
             elif info["ID"] == "fedora":
-                logging.info('Distribution is FedoraLinux. Checking for dnf binaries...')
+                inf('Distribution is FedoraLinux. Checking for dnf binaries...')
                 if os.path.exists('/usr/bin/dnf'):
-                    logging.info('Found dnf.')
+                    inf('Found dnf.')
                     return '/usr/bin/dnf'
                 else:
-                    logging.error('No xbps binary found.')
+                    error('No xbps binary found.')
             elif info["ID"] == "gentoo":
-                logging.info('Distribution is GentooLinux. Checking for portage binaries...')
+                inf('Distribution is GentooLinux. Checking for portage binaries...')
                 if os.path.exists('/usr/bin/emerge'):
-                    logging.info('Found portage.')
+                    inf('Found portage.')
                     return '/usr/bin/emerge'
                 else:
-                    logging.error('No portage/emerge binary found.')
+                    error('No portage/emerge binary found.')
             else:
-                logging.fatal('Distribution "{}" is not supported.'.format(info["ID"]))
+                error('Distribution "{}" is not supported.'.format(info["ID"]))
         def set_data_file():
             if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
