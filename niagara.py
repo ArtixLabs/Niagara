@@ -1,7 +1,7 @@
 import argparse
 from src import deps
 parser = argparse.ArgumentParser()
-VERSION="0.1.2"
+VERSION="0.0.0.1"
 parser.add_argument('-c','--config')
 parser.add_argument('-p', '--packages')
 parser.add_argument('--set-os')
