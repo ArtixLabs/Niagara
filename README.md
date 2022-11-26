@@ -30,7 +30,9 @@ Niagara has a list of packages that you can place inside the configuration file,
 {
     "name": "doas",
     "arch": "opendoas",
-    "void": "opendoas"
+    "void": "opendoas",
+    "fedora": "opendoas",
+    "gentoo": "app-admin/doas"
 }
 ```
 
@@ -43,6 +45,10 @@ This allows us to support multiple distributions, whilst making it a *write once
   - wallpaper
   - dotfile
   - scripts
+  - commands
+    - available to clone and use a git repository as the basis for commands
+    - option to run the command in a specified directory
+- xinitrc generation
 
 ## Example configuration
 
