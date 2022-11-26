@@ -1,4 +1,5 @@
 import subprocess
+import os
 import pygit2
 import json
 
@@ -21,3 +22,12 @@ class Generic():
                                         subprocess.call(x["cmd"].split(), cwd=x["dir"])
                                     else:
                                         subprocess.call(x["cmd"].split())
+            if "xinitrc" in json.loads(_data):
+                lines = []
+                for cmd in json.loads(_data)["xinitrc"]:
+                    lines.append(cmd)
+
+                with open(os.environ['HOME'] + '/.xinitrc') as f:
+                    f.writelines(lines)
+                f.close()
+
