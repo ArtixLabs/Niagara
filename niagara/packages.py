@@ -70,14 +70,17 @@ class Packages():
             ])
     def set_pkgs(self) -> dict:
         x = Deps(os.environ['HOME'] + '/.local/share/niagara/database.json')
-        arch = void = gentoo = fedora = debian = []
+        arch = []
+        void = []
+        gentoo = []
+        fedora = []
+        debian = []
         for pkg in x.pkgs:
             arch.append({'pkgname': pkg.name, 'pkg': pkg.arch_pkg})
             void.append({'pkgname': pkg.name, 'pkg': pkg.void_pkg})
             gentoo.append({'pkgname': pkg.name, 'pkg': pkg.gentoo_pkg})
             fedora.append({'pkgname': pkg.name, 'pkg': pkg.fedora_pkg})
             debian.append({'pkgname': pkg.name, 'pkg': pkg.debian_pkg})
-  
         return dict([
             ('arch', arch),
             ('void', void),
