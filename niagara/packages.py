@@ -60,7 +60,8 @@ class Packages():
             else:
                 if not (os.path.exists(os.environ['HOME'] + "/.local/share")):
                     os.mkdir(os.environ['HOME'] + '/.local/share')
-                os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
+                if not (os.path.exists(os.environ['HOME'] + "/.local/share/niagara")):
+                    os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
                 generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
                 return os.environ['HOME'] + '/.local/share/niagara/database.json'
         return dict([
@@ -69,6 +70,16 @@ class Packages():
             ('data', set_data_file()),
             ('pkgs', self.set_pkgs())
             ])
+    def force_gen(self):
+        if os.path.exists(os.environ['HOME'] + "/.local/share/niagara/database.json"):
+            generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
+        else:
+            if not (os.path.exists(os.environ['HOME'] + "/.local/share")):
+                os.mkdir(os.environ['HOME'] + '/.local/share')
+            if not (os.path.exists(os.environ['HOME'] + "/.local/share/niagara")):
+                os.mkdir(os.environ['HOME'] + '/.local/share/niagara')
+            generate_database_file(os.environ['HOME'] + '/.local/share/niagara/database.json')
+
     def set_pkgs(self) -> dict:
         x = Deps(os.environ['HOME'] + '/.local/share/niagara/database.json')
         arch = []

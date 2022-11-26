@@ -3,8 +3,9 @@ from .config import Config
 from .generic import Generic
 from .packages import Packages
 parser = argparse.ArgumentParser()
-VERSION="0.0.0.2"
+VERSION="0.0.0.3"
 parser.add_argument('-c','--config')
+parser.add_argument('--refresh-database', action="store_true")
 parser.add_argument('-p', '--packages')
 parser.add_argument('--set-os')
 parser.add_argument('-d', '--dry')
@@ -15,6 +16,9 @@ def run():
         arch = args.set_os
     else:
         arch = 'arch'
+    if args.refresh_database == True:
+        x = Packages()
+        x.force_gen()
     if args.dry:
         x = Packages()
         x.dry_run(args.dry, arch)
