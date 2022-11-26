@@ -313,7 +313,7 @@ def generate_database_file(path):
       "fedora": "",
       "debian": "",
       "gentoo": ""
-    },
+    }
 
   ]
 }
