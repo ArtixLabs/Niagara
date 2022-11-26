@@ -12,7 +12,7 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = 'https://github.com/ArtixLabs/Niagara',
-    py_modules = ['niagara', 'src'],
+    py_modules = ['niagara'],
     packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.9',
@@ -21,6 +21,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        niagara=niagara:run
+        niagara=niagara.__main__:run
     '''
 )

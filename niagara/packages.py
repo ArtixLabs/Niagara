@@ -311,6 +311,21 @@ class Package:
 class UPackage:
     def __init__(self, name: str):
         self.name = name
+class Pkgs:
+    def __init__(self, file):
+        self.file = file
+        self.pkgs = []
+        self.read_to_pkg()
+    def read_to_pkg(self):
+        with open(self.file) as f:
+            _data = f.read()
+            _json_data = json.loads(_data)
+            if "packages" in _json_data:
+                _pkgs = _json_data["packages"]
+                for package in _pkgs:
+                    self.pkgs.append(UPackage(name=package))
+        f.close()
+
 class Deps:
     def __init__(self, file):
         self.file = file
@@ -326,78 +341,4 @@ class Deps:
                     self.pkgs.append(Package(name=package.get("pkgname"), arch_pkg=package.get("arch"), void_pkg=package.get("void")))
         f.close()
 
-class Config():
-    def __init__(self, file):
-        self.file = file
-
-    def operate(self):
-        with open(self.file) as f:
-            _data = f.read()
-            _json_data = json.loads(_data)
-            if "config" in _json_data:
-                _config_opts = _json_data["config"]
-                for opt in _config_opts:
-                    if opt.get("option") == "wallpaper": # ADD DEP CHECK FOR PKGS
-                        file = str(opt.get("val").rsplit('/', 1).pop())
-                        if os.path.exists(os.environ['HOME'] + '/.wallpaper'):
-                            urlretrieve(str(opt.get("val")), file)
-                            os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
-                        else:
-                            os.mkdir(os.environ['HOME'] + '/.wallpaper')
-                            urlretrieve(str(opt.get("val")), file)
-                            os.replace(file, os.environ['HOME'] + '/.wallpaper/' + file)
-                        subprocess.call(['feh', '--bg-scale', os.environ['HOME'] + '/.wallpaper/' + file])
-                    elif opt.get("option") == "dotfile":
-                        for x in opt.get("val"):
-                            pygit2.clone_repository(x, os.environ['HOME'] + '/.config/' + str(x.rsplit('/', 1).pop()))
-                    elif opt.get("option") == "scripts":
-                        for script in opt.get("val"):
-                            if script.get("method"):
-                                method = script.get("method")
-                            else:
-                                method = "git"
-                            if method == "curl":
-                                print(script.get("url"))
-                                urlretrieve(str(script.get("url")), str(script.get("url").rsplit('/', 1).pop()))
-                                subprocess.call(['sh', str(script.get("url").rsplit('/', 1).pop())])
-                            elif method == "git":
-                                pygit2.clone_repository(script.get("url"), str(script.get("url").rsplit('/', 1).pop()))
-                                if script.get("trigger"):
-                                    subprocess.call(script.get("trigger").split())
-                                else:
-                                    subprocess.call(['sh', script.get("url") + '/' + 'script.sh'])
-
-class Pkgs:
-    def __init__(self, file):
-        self.file = file
-        self.pkgs = []
-        self.read_to_pkg()
-    def read_to_pkg(self):
-        with open(self.file) as f:
-            _data = f.read()
-            _json_data = json.loads(_data)
-            if "packages" in _json_data:
-                _pkgs = _json_data["packages"]
-                for package in _pkgs:
-                    self.pkgs.append(UPackage(name=package))
-        f.close()
-class Generic():
-    def __init__(self, file):
-        self.file = file
-
-    def operate(self):
-        with open(self.file) as f:
-            _data = f.read()
-            if "source" in json.loads(_data):
-                for cmd in json.loads(_data)["source"]:
-                    if "link" in cmd:
-                        pygit2.clone_repository(cmd["link"], str(cmd["link"].rsplit('/', 1).pop()))
-                    if "cmds" in cmd:
-                            cmds = cmd["cmds"]
-                            for x in cmds:
-                                if "cmd" in x:
-                                    if "dir" in x:
-                                        subprocess.call(x["cmd"].split(), cwd=x["dir"])
-                                    else:
-                                        subprocess.call(x["cmd"].split())
 
