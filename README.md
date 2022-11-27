@@ -55,14 +55,16 @@ This allows us to support multiple distributions, whilst making it a *write once
 ```json
 {
   "packages": [
+    "sway",
     "feh",
-    "doas",
-    "picom"
+    "picom",
+    "i3",
+    "kitty"
   ],
   "config": [
     {
       "option": "wallpaper",
-      "val": "https://github.com/emacs-dashboard/emacs-dashboard/raw/master/banners/emacs.png"
+      "val": "https://github.com/kavulox/dotfiles/raw/master/wallpapers/forest.jpg"
     },
     {
       "option": "dotfile",
@@ -70,7 +72,31 @@ This allows us to support multiple distributions, whilst making it a *write once
         "https://github.com/kavulox/nvim",
         "https://github.com/kavulox/picom"
       ]
+    },
+    {
+      "option": "scripts",
+      "val": [
+        {
+          "method": "curl",
+          "url": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+        }
+      ]
     }
+  ],
+  "source": [
+    {
+      "link": "https://git.suckless.org/dwm",
+      "cmds": [
+        {
+          "dir": "dwm",
+          "cmd": "sudo make clean install"
+        }
+      ]
+    }
+  ],
+  "xinitrc": [
+    "picom -b",
+    "exec dwm"
   ]
 }
 ```
