@@ -1,0 +1,46 @@
+{
+  "packages": [
+    "sway",
+    "feh",
+    "picom",
+    "i3",
+    "kitty"
+  ],
+  "config": [
+    {
+      "option": "wallpaper",
+      "val": "https://github.com/kavulox/dotfiles/raw/master/wallpapers/forest.jpg"
+    },
+    {
+      "option": "dotfile",
+      "val": [
+        "https://github.com/kavulox/nvim",
+        "https://github.com/kavulox/picom"
+      ]
+    },
+    {
+      "option": "scripts",
+      "val": [
+        {
+          "method": "curl",
+          "url": "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+        }
+      ]
+    }
+  ],
+  "source": [
+    {
+      "link": "https://git.suckless.org/dwm",
+      "cmds": [
+        {
+          "dir": "dwm",
+          "cmd": "sudo make clean install"
+        }
+      ]
+    }
+  ],
+  "xinitrc": [
+    "picom -b",
+    "execm dwm"
+  ]
+}
