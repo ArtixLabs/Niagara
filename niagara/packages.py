@@ -119,7 +119,7 @@ class Packages():
         vuln = Pkgs(path)
         for pkg in vuln.pkgs:
             if pkg.name in cmds:
-                print(cmds[pkg.name])
+                inf(cmds[pkg.name])
     def install_pkgs(self, path):
         def conc(arr, lip):
             tmp = []
@@ -130,9 +130,11 @@ class Packages():
             return tmp
         if self.config['pkgman'] == '/usr/bin/pacman':
             if self.generate_full_cmd(path, 'arch') != []:
+                inf('Installing the following packages: {}'.format(self.generate_full_cmd(path, 'arch')))
                 subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'arch')))
         elif self.config['pkgman'] == '/usr/bin/xbps-install': # Not in use, yet.
             if self.generate_full_cmd(path, 'void') != []:
+                inf('Installing the following packages: {}'.format(self.generate_full_cmd(path, 'void')))
                 subprocess.call(conc([self.config['sudo'], self.config['pkgman'], '-S'], self.generate_full_cmd(path, 'void')))
 
 class Package:
