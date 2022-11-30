@@ -38,7 +38,7 @@ def generate_database_file(path):
       "pkgname": "feh",
       "arch": "feh",
       "void": "feh",
-      "fedora": "",
+      "fedora": "feh",
       "debian": "feh",
       "gentoo": "media-gfx/feh"
     },
@@ -46,7 +46,7 @@ def generate_database_file(path):
       "pkgname": "emacs",
       "arch": "emacs",
       "void": "emacs",
-      "fedora": "",
+      "fedora": "emacs",
       "debian": "emacs",
       "gentoo": "app-editors/emacs"
     },
@@ -54,7 +54,7 @@ def generate_database_file(path):
       "pkgname": "vim",
       "arch": "vim",
       "void": "vim",
-      "fedora": "",
+      "fedora": "vim",
       "debian": "vim",
       "gentoo": "app-editors/vim"
     },
@@ -62,7 +62,7 @@ def generate_database_file(path):
       "pkgname": "neovim",
       "arch": "neovim",
       "void": "neovim",
-      "fedora": "",
+      "fedora": "neovim",
       "debian": "neovim",
       "gentoo": "app-editors/neovim"
     },
@@ -70,7 +70,7 @@ def generate_database_file(path):
       "pkgname": "rofi",
       "arch": "rofi",
       "void": "rofi",
-      "fedora": "",
+      "fedora": "rofi",
       "debian": "rofi",
       "gentoo": "x11-misc/rofi"
     },
@@ -78,7 +78,7 @@ def generate_database_file(path):
       "pkgname": "flameshot",
       "arch": "flameshot",
       "void": "flameshot",
-      "fedora": "",
+      "fedora": "flameshot",
       "debian": "flameshot",
       "gentoo": "media-gfx/flameshot"
     },
@@ -87,14 +87,14 @@ def generate_database_file(path):
       "arch": "opendoas",
       "void": "opendoas",
       "fedora": "opendoas",
-      "debian": "",
+      "debian": "doas", # > Debian 11
       "gentoo": "app-admin/doas"
     },
     {
       "pkgname": "dunst",
       "arch": "dunst",
       "void": "dunst",
-      "fedora": "",
+      "fedora": "dunst",
       "debian": "dunst",
       "gentoo": "x11-misc/dunst"
     },
@@ -102,7 +102,7 @@ def generate_database_file(path):
       "pkgname": "firefox",
       "arch": "firefox",
       "void": "firefox",
-      "fedora": "",
+      "fedora": "firefox",
       "debian": "firefox",
       "gentoo": "www-client/firefox-bin"
     },
@@ -110,7 +110,7 @@ def generate_database_file(path):
       "pkgname": "ripgrep",
       "arch": "ripgrep",
       "void": "ripgrep",
-      "fedora": "",
+      "fedora": "ripgrep",
       "debian": "ripgrep",
       "gentoo": "sys-apps/ripgrep"
     },
@@ -118,7 +118,7 @@ def generate_database_file(path):
       "pkgname": "mpv",
       "arch": "mpv",
       "void": "mpv",
-      "fedora": "",
+      "fedora": "mpv",
       "debian": "mpv",
       "gentoo": "media-video/mpv"
     },
@@ -126,15 +126,15 @@ def generate_database_file(path):
       "pkgname": "dmenu",
       "arch": "dmenu",
       "void": "dmenu",
-      "fedora": "",
-      "debian": "",
+      "fedora": "dmenu",
+      "debian": "dmenu",
       "gentoo": "x11-misc/dmenu"
     },
     {
       "pkgname": "lynx",
       "arch": "lynx",
       "void": "lynx",
-      "fedora": "",
+      "fedora": "lynx",
       "debian": "lynx",
       "gentoo": "www-client/lynx"
     },
@@ -142,15 +142,15 @@ def generate_database_file(path):
       "pkgname": "fzf",
       "arch": "fzf",
       "void": "fzf",
-      "fedora": "",
+      "fedora": "fzf",
       "debian": "fzf",
-      "gentoo": "www-client/lynx"
+      "gentoo": "app-shells/fzf"
     },
     {
       "pkgname": "bat",
       "arch": "bat",
       "void": "bat",
-      "fedora": "",
+      "fedora": "bat",
       "debian": "bat",
       "gentoo": "sys-apps/bat"
     },
@@ -158,7 +158,7 @@ def generate_database_file(path):
       "pkgname": "ffmpeg",
       "arch": "ffmpeg",
       "void": "ffmpeg",
-      "fedora": "",
+      "fedora": "ffmpeg",
       "debian": "ffmpeg",
       "gentoo": "media-video/ffmpeg"
     },
@@ -166,7 +166,7 @@ def generate_database_file(path):
       "pkgname": "ytdl",
       "arch": "youtube-dl",
       "void": "youtube-dl",
-      "fedora": "",
+      "fedora": "youtube-dl",
       "debian": "youtube-dl",
       "gentoo": "net-misc/youtube-dl"
     },
@@ -174,9 +174,9 @@ def generate_database_file(path):
       "pkgname": "sway",
       "arch": "sway",
       "void": "",
-      "fedora": "",
-      "debian": "",
-      "gentoo": ""
+      "fedora": "sway",
+      "debian": "sway", # > Debian 11
+      "gentoo": "gui-wm/sway"
     },
     {
       "pkgname": "xorg",
@@ -195,10 +195,11 @@ def generate_database_file(path):
       "gentoo": ""
     },
     {
+      # i3 and i3-gaps are getting merged sometime in the future, look out for that in the repos of each distro
       "pkgname": "i3",
       "arch": "i3-gaps",
       "void": "",
-      "fedora": "",
+      "fedora": "i3-gaps",
       "debian": "",
       "gentoo": ""
     },
@@ -206,7 +207,7 @@ def generate_database_file(path):
       "pkgname": "bspwm",
       "arch": "bspwm",
       "void": "",
-      "fedora": "",
+      "fedora": "bspwm",
       "debian": "",
       "gentoo": ""
     },
@@ -222,7 +223,7 @@ def generate_database_file(path):
       "pkgname": "waybar",
       "arch": "waybar",
       "void": "",
-      "fedora": "",
+      "fedora": "waybar",
       "debian": "",
       "gentoo": ""
     },
@@ -230,9 +231,9 @@ def generate_database_file(path):
       "pkgname": "swaybg",
       "arch": "swaybg",
       "void": "",
-      "fedora": "",
+      "fedora": "swaybg",
       "debian": "",
-      "gentoo": ""
+      "gentoo": "" # Not applicable
     },
     {
       "pkgname": "mpd",
@@ -243,10 +244,10 @@ def generate_database_file(path):
       "gentoo": ""
     },
     {
-      "pkgname": "",
+      "pkgname": "wofi",
       "arch": "",
       "void": "",
-      "fedora": "",
+      "fedora": "wofi",
       "debian": "",
       "gentoo": ""
     },
